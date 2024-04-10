@@ -1,15 +1,24 @@
-﻿namespace NetflixApp.Pages;
+﻿using Services;
+
+namespace NetflixApp.Pages;
 
 public partial class MainPage : ContentPage
 {
+	private readonly TmdbService _tmdbService;
 	int count = 0;
 
-	public MainPage()
+	public MainPage(TmdbService tmdbService)
 	{
 		InitializeComponent();
+		_tmdbService = tmdbService;
 	}
 
-	private void OnCounterClicked(object sender, EventArgs e)
+    protected async override void OnAppearing()
+    {
+        base.OnAppearing();
+		var trending = await _tmdbService.GetTrendingAsync();
+    }
+    private void OnCounterClicked(object sender, EventArgs e)
 	{
 		count++;
 

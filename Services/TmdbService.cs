@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Net.Http.Json;
+using Models;
 
 namespace Services
 {
@@ -18,6 +20,21 @@ namespace Services
 
         private HttpClient HttpClient => _httpClientFactory.CreateClient(TmdbHttpClientName);
 
+        public async Task<IEnumerable<Media>> GetTrendingAsync() =>
+            await GetMediasAsync(TmdbUrls.Trending);
+
+        public async Task<IEnumerable<Media>> GetTopRatedAsync() =>
+            await GetMediasAsync(TmdbUrls.TopRated);
+        public async Task<IEnumerable<Media>> GetNetflixOriginalAsync() =>
+           await GetMediasAsync(TmdbUrls.NetflixOriginals);
+        public async Task<IEnumerable<Media>> GetActionAsync() =>
+            await GetMediasAsync(TmdbUrls.Action);
+        private async Task<IEnumerable<Media>> GetMediasAsync(string url)
+        {
+            var trendingMoviesCollections = await HttpClient.GetFromJsonAsync<Movie>($"{url}&api_key={ApiKey}");
+            return trendingMoviesCollections.results
+                .Select(r => r.ToMediaObject());
+        }
 
     }
     public static class TmdbUrls
@@ -60,6 +77,19 @@ namespace Services
         public string ThumbnailSmall => $"https://image.tmdb.org/t/p/w220_and_h330_face/{ThumbnailPath}";
         public string ThumbnailUrl => $"https://image.tmdb.org/t/p/original/{ThumbnailPath}";
         public string DisplayTitle => title ?? name ?? original_title ?? original_name;
+
+        public Media ToMediaObject() =>
+            new()
+            {
+                Id = id,
+                DisplayTitle = DisplayTitle,
+                MediaType = media_type,
+                Overview = overview,
+                ReleaseDate = release_date,
+                Thumbnail = Thumbnail,
+                ThumbnailSmall = ThumbnailSmall,
+                ThumbnailUrl = ThumbnailUrl
+            };
     }
 
 
