@@ -1,41 +1,138 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NetflixApp.Pages.MainPage">
+             x:Class="NetflixApp.Pages.MainPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="Black"
+             xmlns:vm="clr-namespace:ViewModels"
+             x:DataType="vm:HomeViewModel">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="MenuLabel">
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+    <Grid Margin="0"
+          Padding="0">
+        <ScrollView BackgroundColor="Black">
+            <VerticalStackLayout>
+                <Grid HeightRequest="500">
+                    <Image Aspect="Center"
+                           HeightRequest="350"
+                           VerticalOptions="Start"
+                           Opacity="0.8">
+                        <Image.Source>
+                            <UriImageSource Uri="{Binding TrendingMovie.Thumbnail}"/>
+                        </Image.Source>
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectMediaCommand}"
+                                                  CommandParameter="{Binding TrendingMovie}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
 
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+                    <Grid VerticalOptions="Start"
+                          HeightRequest="35"
+                          Margin="0, 35, 0, 0">
+                        <FlexLayout JustifyContent="SpaceAround"
+                                    VerticalOptions="Center">
+                            <Label Text="TV Shows"
+                                   Style="{StaticResource MenuLabel}"/>
+                            <Label Text="Movies"
+                                   Style="{StaticResource MenuLabel}"/>
+                            <Label Text="Categories"
+                                   Style="{StaticResource MenuLabel}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="CategoriesMenu_Tapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </FlexLayout>
+                    </Grid>
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
+                    <HorizontalStackLayout VerticalOptions="End"
+                                           HorizontalOptions="Center"
+                                           Spacing="50">
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+                        <VerticalStackLayout>
+                            <Label Text="+"
+                                   HorizontalTextAlignment="Center"
+                                   FontAttributes="Bold"
+                                   FontSize="20"/>
+                            <Label Text="My List"
+                                   HorizontalTextAlignment="Center"/>
+                        </VerticalStackLayout>
 
-        </VerticalStackLayout>
-    </ScrollView>
+                        <Border StrokeShape="RoundRectangle 5"
+                                BackgroundColor="White"
+                                Padding="20, 5">
+                            <HorizontalStackLayout Spacing="5"
+                                                   VerticalOptions="Center">
+                                <Image Source="play"
+                                       Aspect="AspectFit"
+                                       HeightRequest="16"
+                                       WidthRequest="16"/>
+                                <Label Text="Play"
+                                       TextColor="Black"
+                                       FontAttributes="Bold"
+                                       FontSize="16"
+                                       />
+                            </HorizontalStackLayout>
+                        </Border>
+
+                        <VerticalStackLayout >
+                            <Grid HorizontalOptions="Center">
+                                <Ellipse Stroke="White"
+                                         HeightRequest="22"
+                                         WidthRequest="22"
+                                         StrokeThickness="2"/>
+                                <Label Text="i"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"
+                                       FontAttributes="Bold"/>
+                            </Grid>
+                            <Label Text="Info"
+                                   HorizontalOptions="Center"
+                                   Margin="0, 10, 0, 0"/>
+                            <VerticalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectMediaCommand}"
+                                                  CommandParameter="{Binding TrendingMovie}"/>
+                            </VerticalStackLayout.GestureRecognizers>
+                        </VerticalStackLayout>
+
+                    </HorizontalStackLayout>
+
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+        <Grid HeightRequest="35"
+              VerticalOptions="Start">
+            <FlexLayout JustifyContent="SpaceBetween">
+                <Image Source="ntflx_logo"
+                       Aspect="AspectFill"
+                       VerticalOptions="Start"
+                       HeightRequest="30"
+                       WidthRequest="30"/>
+                <HorizontalStackLayout VerticalOptions="Center"
+                                       Spacing="15"
+                                       Margin="5, 0">
+                    <ImageButton Source="search.png"
+                                 Aspect="AspectFill"
+                                 HeightRequest="20"
+                                 WidthRequest="20"/>
+                    <ImageButton Source="user.png"
+                                 Aspect="AspectFill"
+                                 HeightRequest="20"
+                                 WidthRequest="20"/>
+                </HorizontalStackLayout>
+            </FlexLayout>
+        </Grid>
+
+    </Grid>
 
 </ContentPage>

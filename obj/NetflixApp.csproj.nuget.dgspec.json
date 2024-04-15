@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\opilane\\source\\repos\\NetflixApp\\NetflixApp.csproj": {}
+    "C:\\Users\\opilane\\Source\\Repos\\NetflixApp\\NetflixApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\opilane\\source\\repos\\NetflixApp\\NetflixApp.csproj": {
+    "C:\\Users\\opilane\\Source\\Repos\\NetflixApp\\NetflixApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\opilane\\source\\repos\\NetflixApp\\NetflixApp.csproj",
+        "projectUniqueName": "C:\\Users\\opilane\\Source\\Repos\\NetflixApp\\NetflixApp.csproj",
         "projectName": "NetflixApp",
-        "projectPath": "C:\\Users\\opilane\\source\\repos\\NetflixApp\\NetflixApp.csproj",
+        "projectPath": "C:\\Users\\opilane\\Source\\Repos\\NetflixApp\\NetflixApp.csproj",
         "packagesPath": "C:\\Users\\opilane\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\opilane\\source\\repos\\NetflixApp\\obj\\",
+        "outputPath": "C:\\Users\\opilane\\Source\\Repos\\NetflixApp\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
