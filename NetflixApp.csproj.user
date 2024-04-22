@@ -14,6 +14,9 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
+    <MauiXaml Update="Controls\MovieInfoBox.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Controls\MovieRow.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

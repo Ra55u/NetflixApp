@@ -31,4 +31,6 @@ public partial class MovieRow : ContentView
         get => (bool)GetValue(MovieRow.IsLargeProperty);
         set => SetValue(MovieRow.IsLargeProperty, value);
     }
+
+    public bool IsNotLarge => !IsLarge;
 }
