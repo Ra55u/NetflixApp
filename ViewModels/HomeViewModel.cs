@@ -19,7 +19,10 @@ namespace ViewModels
         private Media _trendingMovie;
 
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(ShowMovieInfoBox))]
         private Media _selectedMedia;
+        public bool ShowMovieInfoBox => SelectedMedia is not null;
+
 
         public ObservableCollection<Media> Trending { get; set; } = new();
         public ObservableCollection<Media> TopRated { get; set; } = new();
@@ -54,16 +57,22 @@ namespace ViewModels
             SetMediaCollection(topRatedList, TopRated);
             SetMediaCollection(actionList, ActionMovies);
 
-            SelectedMedia = TrendingMovie;
+            //SelectedMedia = TrendingMovie;
         }
 
         private static void SetMediaCollection(IEnumerable<Media> medias, ObservableCollection<Media> collection)
-        {
-            collection.Clear();
-            foreach (var media in medias)
-            {
 
+        [RelayCommand]
+        private void SelectMedia(Media media = null)
+        {
+            if(media is not null)
+            {
+                if(media.Id == SelectedMedia?.Id)
+                {
+                    media = null;
+                }
             }
+            SelectedMedia = media;
         }
     }
 }

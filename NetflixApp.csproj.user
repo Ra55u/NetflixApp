@@ -21,4 +21,9 @@
       <SubType>Designer</SubType>
     </MauiXaml>
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Pages\CategoriesPage.xaml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
 </Project>
