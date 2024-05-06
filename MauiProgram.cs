@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using NetflixApp.Pages;
+using NetflixApp.ViewModels;
 using Services;
 using ViewModels;
 
@@ -26,6 +27,10 @@ public static class MauiProgram
         builder.Services.AddSingleton<TmdbService>();
         builder.Services.AddSingleton<HomeViewModel>();
         builder.Services.AddSingleton<MainPage>();
+
+		builder.Services.AddSingleton<CategoriesViewModel>();
+        builder.Services.AddSingleton<CategoriesPage>();
+
 
         return builder.Build();
 	}
