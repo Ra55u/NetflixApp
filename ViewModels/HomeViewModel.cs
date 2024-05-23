@@ -61,6 +61,13 @@ namespace ViewModels
         }
 
         private static void SetMediaCollection(IEnumerable<Media> medias, ObservableCollection<Media> collection)
+        {
+            collection.Clear();
+            foreach (var media in medias)
+            {
+                collection.Add(media);
+            }
+        }
 
         [RelayCommand]
         private void SelectMedia(Media media = null)

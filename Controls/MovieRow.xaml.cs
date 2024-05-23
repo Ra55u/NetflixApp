@@ -1,4 +1,5 @@
 using Models;
+using System.Windows.Input;
 
 namespace Controls;
 
@@ -12,9 +13,13 @@ public partial class MovieRow : ContentView
 
     public static readonly BindableProperty IsLargeProperty =
             BindableProperty.Create(nameof(IsLarge), typeof(bool), typeof(MovieRow), false);
+
+    public event EventHandler<MediaSelectEventArgs> MediaSelected;
+
     public MovieRow()
     {
         InitializeComponent();
+        MediaDetailsCommand = new Command(ExecuteMediaDetailsCommand);
     }
     public string Heading
     {
@@ -33,4 +38,13 @@ public partial class MovieRow : ContentView
     }
 
     public bool IsNotLarge => !IsLarge;
+
+    public ICommand MediaDetailsCommand { get; private set; }
+    private void ExecuteMediaDetailsCommand(object parameter)
+    {
+        if (parameter is Media media && media is not null)
+        {
+            MediaSelected?.Invoke(this, new MediaSelectEventArgs(media));
+        }
+    }
 }

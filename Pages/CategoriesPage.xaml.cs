@@ -1,3 +1,5 @@
+using NetflixApp.ViewModels;
+
 namespace NetflixApp.Pages;
 
 public partial class CategoriesPage : ContentPage
